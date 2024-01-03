@@ -1,0 +1,27 @@
+﻿@page
+@model LockoutModel
+@{
+    ViewData["Title"] = "Banned";
+}
+
+
+<div class="heading">
+    <h1>@ViewData["Title"]</h1>
+    <p class="text-danger">Oh no! This account has been banned.</p>
+</div>
+
+<div class="container">
+    <div class="row py-1 mt-4 align-items-center">
+                
+        <!-- For Demo Purpose -->
+        <div class="col-md-5 col-md-offset-2 ml-auto">
+            <img src="https://res.cloudinary.com/dd9hvrpuv/image/upload/v1617127344/forgot-password-concept-illustration_114360-1123_hmirrj.jpg" alt="" class="img-fluid mb-3 d-none d-md-block">
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/site.js"></script>
+}

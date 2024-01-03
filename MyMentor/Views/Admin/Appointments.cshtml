@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@model List<MyMentor.Models.Appointment>
+
+@{
+    Layout = "~/Views/Shared/_Inside.cshtml";
+    ViewData["Title"] = "Appointments";
+    ViewData["role"] = "Admin";
+}
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <strong class="card-title">History</strong>
+        </div>
+        <div class="card-body">
+            <table id="bootstrap-data-table-export2" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th class="column1">Mentor</th>
+                        <th class="column1">Student</th>
+                        <th class="column2">Course</th>
+                        <th class="column3">Time</th>
+                        <th class="column4">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var app in Model)
+                    {
+                        <tr class="@app.Status.ToString()">
+                            <td>@app.Mentor.FirstName @app.Mentor.LastName</td>
+                            <td>@app.Student.FirstName @app.Student.LastName</td>
+                            <td>@app.Course.Name</td>
+                            <td>@app.Date.ToString("dd.MM.yyyy.") @app.StartTime:00 - @(app.StartTime+1):00 h</td>
+                            <td>@app.Status.ToString()</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

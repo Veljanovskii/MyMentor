@@ -1,0 +1,69 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@model List<List<MyMentor.Models.Course>>
+
+@{
+    Layout = "~/Views/Shared/_Inside.cshtml";
+    ViewData["Title"] = "Courses";
+    ViewData["role"] = "Mentor";
+}
+
+
+<div class="container mt-3 mb-4">
+    <div class="col-lg-9 mt-4 mt-lg-0">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm">
+                    <table class="table manage-candidates-top mb-0">
+                        <thead>
+                            <tr>
+                                <th>Course</th>
+                                <th class="action text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model[0])
+                            {
+                                <tr class="candidates-list">
+                                    <td class="title">
+                                        <div class="candidate-list-details">
+                                            <div class="candidate-list-info">
+                                                <div class="candidate-list-title">
+                                                    <h5 class="mb-0">@item.Name</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <ul class="list-unstyled mb-0 d-flex justify-content-end">
+                                            <li><a asp-action="Modify" asp-route-id="@item.Id" class="text-info" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a></li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            }
+                            @foreach (var item in Model[1])
+                            {
+                                <tr class="candidates-list">
+                                    <td class="title">
+                                        <div class="candidate-list-details">
+                                            <div class="candidate-list-info">
+                                                <div class="candidate-list-title">
+                                                    <h5 class="mb-0">@item.Name</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <ul class="list-unstyled mb-0 d-flex justify-content-end">
+                                            <li><a asp-action="Modify" asp-route-id="@item.Id" class="text-info" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-plus"></i></a></li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

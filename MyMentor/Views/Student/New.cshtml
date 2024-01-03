@@ -1,0 +1,111 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@model MyMentor.Models.Appointment
+
+@{
+    Layout = "~/Views/Shared/_Inside.cshtml";
+    ViewData["Title"] = "New Appointment";
+    ViewData["role"] = "Student";
+}
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <strong class="card-title">Make an appointment</strong>
+        </div>
+        <div class="card-body">
+            <div class="container">
+                <div class="main-body">
+                    <div class="row gutters-sm">
+                        <div class="col-md-8">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <form method="post">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Mentor</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                @Model.Mentor.FirstName @Model.Mentor.LastName
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Email</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                @Model.Mentor.Email
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Course</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                @Model.Course.Name
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Date</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <div id="sandbox-container1">
+                                                    <input asp-for="@Model.Date" type="text" class="form-control dtwidth">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Select Time</h6>
+                                            </div>
+                                            <div class="col-sm-3 text-secondary">                                                
+                                                <select asp-for="@Model.StartTime" class="twidth form-control">
+                                                    @{var pt = Model.Mentor.PreferredTime;
+                                                        int start = Convert.ToInt32(pt.Split(":")[0]);
+                                                        int end = Convert.ToInt32(pt.Split(" - ")[1].Split(":")[0]);
+                                                        for (int i = start; i < end; i++)
+                                                        {
+                                                            <option value="@i">@i:00 - @(i+1):00</option>
+                                                        }
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Address</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                @Model.Mentor.Address
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <input type="hidden" asp-for="@Model.Mentor.Id" />
+                                            <input type="hidden" asp-for="@Model.Student.Id" />
+                                            <input type="hidden" asp-for="@Model.Course.Id" />
+                                        </div>
+                                        <hr>
+                                        <div class="row gutters">
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="text-right">
+                                                    <a asp-action="Course" asp-route-id="@Model.Course.Id" class="btn btn-secondary">Cancel</a>
+                                                    <button type="submit" asp-action="Make" class="btn btn-primary">Make</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

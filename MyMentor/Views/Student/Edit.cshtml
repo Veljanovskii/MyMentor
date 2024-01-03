@@ -1,0 +1,125 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@model MyMentor.Models.ApplicationUser
+
+@{
+    Layout = "~/Views/Shared/_Inside.cshtml";
+    ViewData["Title"] = "Edit Profile";
+    ViewData["role"] = "Student";
+}
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <strong class="card-title">User Profile</strong>
+        </div>
+        <div class="card-body">
+            <div class="container">
+                <div class="main-body">
+
+                    <div class="row gutters-sm">
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column align-items-center text-center">
+                                        <img src="~/img/pfp/@Model.ProfilePicture" alt="Avatar" class="rounded-circle" width="150">
+                                        <div class="mt-3">
+                                            <h4>@Model.FirstName @Model.LastName</h4>
+                                            @if (Model.Rating != 0)
+                                            {
+                                                <p class="text-secondary mb-1">Rating: @Model.Rating.ToString("0.00")</p>
+                                            }
+                                            <p class="text-muted font-size-sm">@Model.Address</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <form method="post">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Full Name</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                @Model.FirstName @Model.LastName
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Email</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                @Model.Email
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Birthdate</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <div id="sandbox-container">
+                                                    <input asp-for="@Model.Birthdate" type="text" class="form-control dtwidth">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Phone</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <input asp-for="@Model.Number" type="text" class="form-control dtwidth">
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Education</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <input asp-for="@Model.Education" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Address</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <input asp-for="@Model.Address" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Join Date</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                @Model.JoinDate.ToString("dd.MM.yyyy.")
+                                            </div>
+                                        </div>
+                                        <input type="hidden" asp-for="@Model.Id" />
+                                        <hr>
+                                        <div class="row gutters">
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="text-right">
+                                                    <a asp-action="Profile" asp-route-id="@Model.Id" class="btn btn-secondary">Cancel</a>
+                                                    <button type="submit" asp-action="Save" class="btn btn-primary">Save</button>                                            
+                                                </div>
+                                            </div>                                            
+                                        </div>                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

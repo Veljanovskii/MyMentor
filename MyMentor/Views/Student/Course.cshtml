@@ -1,0 +1,64 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@model List<MyMentor.ViewModels.MentorTeaches>
+@{
+    Layout = "~/Views/Shared/_Inside.cshtml";
+    ViewData["Title"] = "Course";
+    ViewData["role"] = "Student";
+}
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <strong class="card-title">Choose a mentor</strong>
+        </div>
+        <div class="card-body">
+
+            <div class="content">
+                <div class="container">
+                    
+                    <div class="row">
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-lg-4">
+                                <div class="text-center card-box">
+                                    <div class="member-card pt-2 pb-2">
+                                        <div class="thumb-lg member-thumb mx-auto"><img src="~/img/pfp/@item.Mentor.ProfilePicture" alt="Avatar" class="rounded-circle img-thumbnail" alt="profile-image"></div>
+                                        <div>
+                                            <a asp-action="Profile" asp-route-id="@item.Mentor.Id"><h4>@item.Mentor.FirstName @item.Mentor.LastName</h4></a>
+                                            <p class="text-muted">Mentor </p>
+                                        </div>
+                                        <a type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light" asp-action="New" asp-route-id="@item.CourseId" asp-route-m="@item.Mentor.Id">Hire Now</a>
+                                        <div class="mt-4">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <div class="mt-3">
+                                                        <h4>@item.Price RSD</h4>
+                                                        <p class="mb-0 text-muted">Price</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="mt-3">
+                                                        <h4>@item.Mentor.Rating.ToString("0.00")</h4>
+                                                        <p class="mb-0 text-muted">Rating</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="mt-3">
+                                                        <h4>@item.Mentor.PreferredTime</h4>
+                                                        <p class="mb-0 text-muted">Working hours</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

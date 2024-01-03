@@ -1,0 +1,120 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    var roles = (List<IdentityRole>)ViewData["roles"];
+}
+
+<div class="heading">
+    <h1>@ViewData["Title"]</h1>
+</div>
+
+<div class="container">
+    <div class="row py-5 mt-4 align-items-center">
+        <!-- For Demo Purpose -->
+        <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
+            <img src="https://res.cloudinary.com/dd9hvrpuv/image/upload/v1622884356/register_ywhdow.png" alt="" class="img-fluid mb-3 d-none d-md-block">
+            <h1>Create an Account</h1>
+        </div>
+
+        <!-- Registeration Form -->
+        <div class="col-md-7 col-lg-6 ml-auto">
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <div class="row">
+
+
+                    <!-- First Name -->
+                    <div class="input-group col-lg-6 mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fa fa-user text-muted"></i>
+                            </span>
+                        </div>
+                        <input asp-for="Input.FirstName" class="form-control border-left-0 border-md" type="text" placeholder="First Name" />
+                    </div>
+
+                    <!-- Last Name -->
+                    <div class="input-group col-lg-6 mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fa fa-user text-muted"></i>
+                            </span>
+                        </div>
+                        <input asp-for="Input.LastName" class="form-control border-left-0 border-md" type="text" placeholder="Last Name" />
+                    </div>
+
+                    <!-- Email Address -->
+                    <div class="input-group col-lg-12 mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fa fa-envelope text-muted"></i>
+                            </span>
+                        </div>
+                        <input asp-for="Input.Email" class="form-control border-left-0 border-md" type="text" placeholder="Email Address" />
+                    </div>
+
+                    <!-- Password -->
+                    <div class="input-group col-lg-6 mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fa fa-lock text-muted"></i>
+                            </span>
+                        </div>
+                        <input asp-for="Input.Password" class="form-control border-left-0 border-md" type="password" placeholder="Password" />
+                    </div>
+
+                    <!-- Password Confirmation -->
+                    <div class="input-group col-lg-6 mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fa fa-lock text-muted"></i>
+                            </span>
+                        </div>
+                        <input asp-for="Input.ConfirmPassword" class="form-control border-left-0 border-md" type="password" placeholder="Confirm Password" />
+                    </div>
+
+                    <!-- Role -->
+                    <div class="input-group col-lg-12 mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fab fa-black-tie text-muted"></i>
+                            </span>
+                        </div>
+                        <select asp-for="Input.Name" class="form-control custom-select border-left-0 border-md" asp-items='new SelectList(roles,"Id","Name")'>
+                        </select>
+                    </div>
+
+                    <!-- Errors -->
+                    <div class="input-group col-lg-12 mb-4">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-group col-lg-12 mx-auto mb-0">
+                        <button type="submit" class="btn btn-primary btn-block py-2">
+                            <span class="font-weight-bold">Create your account</span>
+                        </button>
+                    </div>
+
+                    <!-- Divider Text -->
+                    <div class="form-group col-lg-12 mx-auto d-flex align-items-center my-4">
+                        <div class="border-bottom w-100 ml-5"></div>
+                        <span class="px-2 small text-muted font-weight-bold">OR</span>
+                        <div class="border-bottom w-100 mr-5"></div>
+                    </div>
+
+                    <!-- Already Registered -->
+                    <div class="text-center w-100 py-2">
+                        <p class="text-muted font-weight-bold">Already Registered? <a asp-area="Identity" asp-page="/Account/Login" class="text-primary ml-2">Login</a></p>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/site.js"></script>
+}

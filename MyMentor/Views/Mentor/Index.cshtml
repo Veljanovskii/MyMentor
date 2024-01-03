@@ -1,0 +1,96 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@model List<MyMentor.Models.Appointment>
+@{
+    Layout = "~/Views/Shared/_Inside.cshtml";
+    ViewData["Title"] = "Index";
+    ViewData["role"] = "Mentor";
+}
+
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <strong class="card-title">Schedule</strong>
+        </div>
+
+        <div class="card-body">
+            <ul class="list-unstyled">
+                @foreach (var app in Model)
+                {
+                <li class="position-relative booking">
+                    <div class="media">
+                        <div class="msg-img">
+                            <img src="~/img/pfp/@app.Student.ProfilePicture" alt="Avatar">
+                        </div>
+                        <div class="media-body">
+                            <h5 class="mb-4">
+                                <a asp-action="Profile" asp-route-id="@app.Student.Id">@app.Student.FirstName @app.Student.LastName</a>
+                                @if (app.Status.ToString() == "Pending")
+                                {
+                                    <span class="badge badge-primary mx-3">Pending</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-success ml-3">Confirmed</span>
+                                }
+                            </h5>
+                            <div class="mb-3">
+                                <span class="mr-2 d-block d-sm-inline-block mb-2 mb-sm-0">Booking Date:</span>
+                                @if (app.Status.ToString() == "Pending")
+                                {
+                                <span class="bg-light-blue">@app.Date.ToString("dd.MM.yyyy.")</span>
+                                }
+                                else
+                                { 
+                                <span class="bg-light-green">@app.Date.ToString("dd.MM.yyyy.")</span>
+                                }
+                            </div>
+                            <div class="mb-3">
+                                <span class="mr-2 d-block d-sm-inline-block mb-2 mb-sm-0">Booking Time:</span>
+                                @if (app.Status.ToString() == "Pending")
+                                {
+                                <span class="bg-light-blue">@app.StartTime:00 - @(app.StartTime + 1):00</span>
+                                }
+                                else
+                                {                                    
+                                <span class="bg-light-green">@app.StartTime:00 - @(app.StartTime + 1):00</span>
+                                }
+                            </div>
+                            <div class="mb-3">
+                                <span class="mr-2 d-block d-sm-inline-block mb-2 mb-sm-0">Course:</span>
+                                @if (app.Status.ToString() == "Pending")
+                                {
+                                <span class="bg-light-blue">@app.Course.Name</span>
+                                }
+                                else
+                                { 
+                                <span class="bg-light-green">@app.Course.Name</span>
+                                }
+                            </div>
+                            <div class="mb-5">
+                                <span class="mr-2 d-block d-sm-inline-block mb-1 mb-sm-0">Client info:</span>
+                                <span class="border-right pr-2 mr-2">@app.Student.Email</span>
+                                <span>@app.Student.Number</span>
+                            </div>
+                        </div>
+                    </div>
+                    <form method="post">
+                        <div class="buttons-to-right">
+                            @if (app.Status.ToString() == "Pending")
+                            {                                
+                                <a asp-action="Confirm" asp-route-id="@app.Id" class="btn-gray mr-2"><i class="fa fa-check-circle mr-2"></i> Confirm</a>
+                                <a asp-action="Deny" asp-route-id="@app.Id" class="btn-gray mr-2"><i class="fa fa-times-circle mr-2"></i> Reject</a>
+                            }
+                            else
+                            { 
+                                <a asp-action="Deny" asp-route-id="@app.Id" class="btn-gray mr-2"><i class="fa fa-times-circle mr-2"></i> Cancel</a>
+                            }
+                        </div>
+                    </form>
+                </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
